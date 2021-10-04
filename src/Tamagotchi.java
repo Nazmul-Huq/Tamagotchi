@@ -13,7 +13,7 @@ public class Tamagotchi {
     * play with your animal.
     * Everytime you play with animal it will reduce energy by 1, increase dirtiness and hungriness by 1
     */
-    public void play(String usersChoiceOfAnimal, int activityForTamagotchi){
+    public void play(String usersChoiceOfAnimal, String activityForTamagotchi){
         System.out.println(this.name + " is playing!!!");
         Images.getImage(usersChoiceOfAnimal, activityForTamagotchi);
         //System.out.println(Images.dogImages.get(1));
@@ -22,19 +22,19 @@ public class Tamagotchi {
         setHungriness("+", 9);//***** will need to change value to 1 before final submission
     }
 
-    public void feed(String usersChoiceOfAnimal, int activityForTamagotchi){
+    public void feed(String usersChoiceOfAnimal, String activityForTamagotchi){
         Images.getImage(usersChoiceOfAnimal, activityForTamagotchi);
         setHungriness("-", 10);
     }
 
-    public void clean(String usersChoiceOfAnimal, int activityForTamagotchi){
+    public void clean(String usersChoiceOfAnimal, String activityForTamagotchi){
         System.out.println(this.name + " is taking a hot shower!!!");
         Images.getImage(usersChoiceOfAnimal, activityForTamagotchi);
         setDirtiness("-", 10);
 
     }
 
-    public void sleep(String usersChoiceOfAnimal, int activityForTamagotchi){
+    public void sleep(String usersChoiceOfAnimal, String activityForTamagotchi){
         System.out.println(this.name + " is sleeping zzzzzz. Do not disturb!");
         Images.getImage(usersChoiceOfAnimal, activityForTamagotchi);
         setEnergy("+", 10);

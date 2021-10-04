@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.time.Clock;
+import java.time.Instant;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.Timer;
@@ -20,39 +22,42 @@ public class Game {
 
         //create the animal based on users choice
         Tamagotchi animalCreatedByUser =  createAnimal(usersChoiceOfAnimal, nameOfAnimal);
+        Clock baseclock = Clock.systemDefaultZone();
+        Instant instant = baseclock.instant();
+        System.out.println("Instant of Base class " + instant);
+
         //Tamagotchi animalCreatedByUser =  new Dog(nameOfAnimal);
         System.out.println("Okay, here is your dog " + animalCreatedByUser.name);
-        Images.getImage(usersChoiceOfAnimal, 1);
+        Images.getImage(usersChoiceOfAnimal, "tamagotchisStatus");
 
         boolean isContinueToPlay = true;
         while (isContinueToPlay){
-            //int activityForTamagotchi = 2;
-            int activityForTamagotchi = getActivity(animalCreatedByUser);
-
-            //check if chosen activity is possible or not. fx, do animal have enough energy to play? is hungry or not before start feeding? etc.
+            String activityForTamagotchi = getActivity(animalCreatedByUser, usersChoiceOfAnimal);
             switch (activityForTamagotchi){
-                case 1:
-                    Images.getImage(usersChoiceOfAnimal, 1);
+                case "tamagotchisStatus":
+                    seeYourTamagotichisStatus(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
                     break;
-                case 2: //play with animal
+                case "play": //play with animal
                     startPlaying(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
                     break;
-                case 3://feed
+                case"feed"://feed
                     startFeeding(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
                     break;
-                case 4://clean
+                case "clean"://clean
                     startCleaning(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
                     break;
-                case 5: //sleep
+                case "sleep": //sleep
                     startSleeping(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
                     break;
-                case 6:
-                    //startAnimalSpecialActivity(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
-
-
-                    //((Dog) animalCreatedByUser).runOutsideWithDog(activityForTamagotchi);
-                    //((Cat) animalCreatedByUser).playOutsideWithCat(activityForTamagotchi);
-                    ((Horse) animalCreatedByUser).goForRideWithHorse(activityForTamagotchi);
+                case "runWithDog": // this activity is only possible for dog
+                    ((Dog) animalCreatedByUser).runWithDog(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
+                    break;
+                case "playWithKittens": // this activity is only possible for cat
+                    ((Cat) animalCreatedByUser).playWithKittens(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
+                    break;
+                case "rideHorse":
+                    ((Horse) animalCreatedByUser).rideHorse(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
+                    break;
                 default:break;
             }
             int activityTime = 1; //individual (play, feed, clean...) activity time in seconds
@@ -64,12 +69,11 @@ public class Game {
             } else if (quitOrPlay.equals("q")) {
                 isContinueToPlay = false;
             }
-
         } // end of while "isContinueToPlay"
     } //end of main
 
 
-    public static void startPlaying(String nameOfAnimal, String usersChoiceOfAnimal, int activityForTamagotchi, Tamagotchi animalCreatedByUser){
+    public static void startPlaying(String nameOfAnimal, String usersChoiceOfAnimal, String activityForTamagotchi, Tamagotchi animalCreatedByUser){
         //for playing with Tamagotchi (animal) energy can't be less than 2 and dirtiness and hungriness can't be more than 8 out of 10
         if (animalCreatedByUser.hungriness != 10 && animalCreatedByUser.dirtiness  != 10 && animalCreatedByUser.energy != 0) {
             animalCreatedByUser.play(usersChoiceOfAnimal, activityForTamagotchi);
@@ -79,40 +83,40 @@ public class Game {
     }
 
 
-    public static void checkAndRecommendActivityBeforePlay(String nameOfAnimal, String usersChoiceOfAnimal, int activityForTamagotchi, Tamagotchi animalCreatedByUser) {
-            if (animalCreatedByUser.hungriness == 10) {
-                System.out.println("I am too hungry. Need to eat first before play");
-                System.out.println("Enter 3 - feed, or 0 to do other activity");
-                activityForTamagotchi = scanner.nextInt();
-                scanner.nextLine();
-                if (activityForTamagotchi == 3) {
+    public static void checkAndRecommendActivityBeforePlay(String nameOfAnimal, String usersChoiceOfAnimal, String activityForTamagotchi, Tamagotchi animalCreatedByUser) {
+        int choseRecommendedActivity = 0;
+        if (animalCreatedByUser.hungriness == 10) {
+            System.out.println("I am too hungry. Need to eat first before play");
+            System.out.println("Enter 3 - feed, or 0 to do other activity");
+            choseRecommendedActivity  = scanner.nextInt();
+            scanner.nextLine();
+            activityForTamagotchi = getUsersOriginalChoice(choseRecommendedActivity, usersChoiceOfAnimal);
+                if (activityForTamagotchi.equals("feed")) {
                     startFeeding(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
                 }
             } else if (animalCreatedByUser.dirtiness == 10) {
                 System.out.println("I am too dirty, need to take a shower first before play");
                 System.out.println("Enter 4- clean, or 0 to do other activity");
-                activityForTamagotchi = scanner.nextInt();
+                choseRecommendedActivity = scanner.nextInt();
                 scanner.nextLine();
-                if (activityForTamagotchi == 4) {
+                activityForTamagotchi = getUsersOriginalChoice(choseRecommendedActivity, usersChoiceOfAnimal);
+                if (activityForTamagotchi.equals("clean")) {
                     startCleaning(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
-                }else if(activityForTamagotchi == 0){
-                    //break;
                 }
             } else if (animalCreatedByUser.energy == 0) {
                 System.out.println("I am too tired, need to sleep first before play");
                 System.out.println("Enter 5- sleep or 0 to do other activity");
-                activityForTamagotchi = scanner.nextInt();
+                choseRecommendedActivity = scanner.nextInt();
                 scanner.nextLine();
-                if (activityForTamagotchi == 5) {
+                activityForTamagotchi = getUsersOriginalChoice(choseRecommendedActivity, usersChoiceOfAnimal);
+            if (activityForTamagotchi.equals("sleep")) {
                     startSleeping(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
                 }
-            } else if(activityForTamagotchi == 0){
             }
-       // }
     }
 
 
-    public static void startFeeding(String nameOfAnimal, String usersChoiceOfAnimal, int activityForTamagotchi, Tamagotchi animalCreatedByUser){
+    public static void startFeeding(String nameOfAnimal, String usersChoiceOfAnimal, String activityForTamagotchi, Tamagotchi animalCreatedByUser){
         //if animal is not hungry( hungriness level is 0) then print that feeding is not possible else start feeding by calling feed()
         if (animalCreatedByUser.hungriness == 0) {
             System.out.println("I am totally full. My current hungriness level is " + animalCreatedByUser.hungriness + " out of 10");
@@ -122,7 +126,7 @@ public class Game {
         }
     }
 
-    public static void startCleaning(String nameOfAnimal, String usersChoiceOfAnimal, int activityForTamagotchi, Tamagotchi animalCreatedByUser) {
+    public static void startCleaning(String nameOfAnimal, String usersChoiceOfAnimal, String activityForTamagotchi, Tamagotchi animalCreatedByUser) {
         //if animal is not dirty( dirtiness level is 0) then print that cleaning is not possible else start cleaning by calling clean()
         if (animalCreatedByUser.dirtiness == 0) {
             System.out.println("I am not dirty at all. My current dirtiness level is " + animalCreatedByUser.dirtiness + " out of 10");
@@ -132,7 +136,7 @@ public class Game {
         }
     }
 
-    public static void startSleeping(String nameOfAnimal, String usersChoiceOfAnimal, int activityForTamagotchi, Tamagotchi animalCreatedByUser) {
+    public static void startSleeping(String nameOfAnimal, String usersChoiceOfAnimal, String activityForTamagotchi, Tamagotchi animalCreatedByUser) {
         //if animal is not tired( energy level is 10) then print that sleeping is not possible else start sleeping by calling sleep()
         if (animalCreatedByUser.energy == 10) {
             System.out.println("I can't sleep right now. My current energy level is " + animalCreatedByUser.energy + " out of 10");
@@ -140,6 +144,13 @@ public class Game {
         } else {
             animalCreatedByUser.sleep(usersChoiceOfAnimal, activityForTamagotchi);
         }
+    }
+
+    public static void seeYourTamagotichisStatus(String nameOfAnimal, String usersChoiceOfAnimal, String activityForTamagotchi, Tamagotchi animalCreatedByUser){
+        Images.getImage(usersChoiceOfAnimal, activityForTamagotchi);
+        System.out.println("Current Energy Level: " + animalCreatedByUser.energy);
+        System.out.println("Current Dirtiness Level: " + animalCreatedByUser.dirtiness);
+        System.out.println("Current Hungriness Level: " + animalCreatedByUser.hungriness);
     }
 
     public static Tamagotchi createAnimal(String usersChoiceOfAnimal, String nameOfAnimal){
@@ -175,16 +186,40 @@ public class Game {
         return nameOfAnimal;
     }
 
-    public static int getActivity(Tamagotchi animalCreatedByUser){
+    public static String  getActivity(Tamagotchi animalCreatedByUser, String usersChoiceOfAnimal){
         // ask user about what kind of activity he likes to do with Tamagotchi (animal), validated user input and return activity
-       int activityForTamagotchi = 0;
+       String  activityForTamagotchi = "";
         System.out.println("Choose an activity with " + animalCreatedByUser.name);
-        System.out.println("1 - See your Tamagotchi ,2 - play, 3 - feed, 4 - clean, 5 - put in sleep");
-        activityForTamagotchi = scanner.nextInt();
+        System.out.println("1-See your Tamagotchi, 2-play, 3-feed, 4-clean, 5-put in sleep, 6-run with dog");
+        int usersChoiceOfActivity = scanner.nextInt();
         scanner.nextLine();
-        //activityForTamagotchi = 1;
-       return activityForTamagotchi;
+        activityForTamagotchi = getUsersOriginalChoice(usersChoiceOfActivity, usersChoiceOfAnimal);
+        return activityForTamagotchi;
 
+    }
+
+    public static String getUsersOriginalChoice(int usersChoiceOfActivity, String usersChoiceOfAnimal){
+        String usersOriginalChoice = "";
+        if (usersChoiceOfActivity == 1) {
+            usersOriginalChoice = "tamagotchisStatus";
+        } else if (usersChoiceOfActivity == 2) {
+            usersOriginalChoice = "play";
+        } else if (usersChoiceOfActivity == 3) {
+            usersOriginalChoice = "feed";
+        } else if (usersChoiceOfActivity == 4) {
+            usersOriginalChoice = "clean";
+        } else if (usersChoiceOfActivity == 5) {
+            usersOriginalChoice = "sleep";
+        }else if (usersChoiceOfActivity == 6) {
+            if (usersChoiceOfAnimal.equals("dog")) {
+                usersOriginalChoice = "runWithDog";
+            } else if (usersChoiceOfAnimal.equals("cat")) {
+                usersOriginalChoice = "playWithKittens";
+            }else if (usersChoiceOfAnimal.equals("horse")) {
+                usersOriginalChoice = "rideHorse";
+            }
+        }
+        return usersOriginalChoice;
     }
 
     public static String getUserName(){

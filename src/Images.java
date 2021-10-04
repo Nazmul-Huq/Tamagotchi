@@ -13,21 +13,21 @@ public class Images {
 
 
     // images for Dog
-    // K6 = running
-    static HashMap<Integer, String > dogImages = new HashMap<>(Map.of(
-            1,"            __\n" +
+    // K6 = runWithDog
+    static HashMap<String, String> dogImages = new HashMap<>(Map.of(
+            "tamagotchisStatus","            __\n" +
                     "(\\,--------'()'--o\n" +
                     " (_    ___    /~\"\n" +
                     "  (_)_)  (_)_)",
 
-            2,"   ___\n" +
+            "play","   ___\n" +
                     " __/_  `.  .-\"\"\"-.\n" +
                     " \\_,` | \\-'  /   )`-')\n" +
                     "  \"\") `\"`    \\  ((`\"`\n" +
                     " ___Y  ,    .'7 /|\n" +
                     "(_,___/...-` (_/_/ sk",
 
-            3,"              _,)\n" +
+            "feed","              _,)\n" +
                     "        _..._.-;-'\n" +
                     "     .-'     `(\n" +
                     "    /      ;   \\\n" +
@@ -38,14 +38,14 @@ public class Images {
                     "((; \\_/  (()       Felix Lee\n" +
                     "     \"",
 
-            4,"  ''',\n" +
+            "clean","  ''',\n" +
                     "o_)O \\)____)\"\n" +
                     " \\_        )\n" +
                     "   '',,,,,,\n" +
                     "     ||  ||\n" +
                     "    \"--'\"--'",
 
-            5,"               _\n" +
+            "sleep","               _\n" +
                     "            ,/A\\,\n" +
                     "          .//`_`\\\\,\n" +
                     "        ,//`____-`\\\\,\n" +
@@ -60,7 +60,7 @@ public class Images {
                     "     |___ /`\\_Y_/`\\____|\n" +
                     "          \\)8===8(/",
 
-            6,"Running Dog"+
+            "runWithDog","Running Dog"+
                     ".--~~,__\n" +
                     "   :-....,-------`~~'._.'\n" +
                     "    `-,,,  ,_      ;'~U'\n" +
@@ -71,15 +71,15 @@ public class Images {
 
 
     // images for Cat
-    // K6 =
-    static HashMap<Integer, String > catImages = new HashMap<>(Map.of(
-            1,"(\"`-''-/\").___..--''\"`-._ \n" +
+    // K6 = playWithKittens
+    static HashMap<String, String > catImages = new HashMap<>(Map.of(
+            "tamagotchisStatus","(\"`-''-/\").___..--''\"`-._ \n" +
                     " `6_ 6  )   `-.  (     ).`-.__.`) \n" +
                     " (_Y_.)'  ._   )  `._ `. ``-..-' \n" +
                     "   _..`--'_..-_/  /--'_.'\n" +
                     "  ((((.-''  ((((.'  (((.-' ",
 
-            2,"                      (`.-,')\n" +
+            "play","                      (`.-,')\n" +
                     "                    .-'     ;\n" +
                     "                _.-'   , `,-\n" +
                     "          _ _.-'     .'  /._\n" +
@@ -89,7 +89,7 @@ public class Images {
                     "('_  _,'.'  (___,))\n" +
                     " `-:;.-'",
 
-            3," ,-.       _,---._ __  / \\\n" +
+            "feed"," ,-.       _,---._ __  / \\\n" +
                     " /  )    .-'       `./ /   \\\n" +
                     "(  (   ,'            `/    /|\n" +
                     " \\  `-\"             \\'\\   / |\n" +
@@ -101,18 +101,18 @@ public class Images {
                     "  )  |  \\  `.___________|/\n" +
                     "  `--'   `--'",
 
-            4,"    |\\__/,|   (`\\\n" +
+            "clean","    |\\__/,|   (`\\\n" +
                     "  _.|o o  |_   ) )\n" +
                     "-(((---(((--------",
 
-            5,"\n" +
+            "sleep","\n" +
                     "              __..--''``---....___   _..._    __\n" +
                     "    /// //_.-'    .-/\";  `        ``<._  ``.''_ `. / // /\n" +
                     "   ///_.-' _..--.'_    \\                    `( ) ) // //\n" +
                     "   / (_..-' // (< _     ;_..__               ; `' / ///\n" +
                     "    / // // //  `-._,_)' // / ``--...____..-' /// / //",
 
-            6,"playing outside with other kitten\n" +
+            "playWithKittens","playing outside with other kitten\n" +
                     "                      /^--^\\     /^--^\\     /^--^\\\n" +
                     "                      \\____/     \\____/     \\____/\n" +
                     "                     /      \\   /      \\   /      \\\n" +
@@ -127,9 +127,9 @@ public class Images {
 
 
     //images for horse
-    // horse riding
-    static HashMap<Integer, String > horseImages = new HashMap<>(Map.of(
-            1, "                          _(\\_/) \n" +
+    // K6: rideHorse
+    static HashMap<String, String > horseImages = new HashMap<>(Map.of(
+            "tamagotchisStatus", "                          _(\\_/) \n" +
                     "                          ,((((^`\\\n" +
                     "                         ((((  (6 \\ \n" +
                     "                       ,((((( ,    \\\n" +
@@ -149,7 +149,7 @@ public class Images {
                     "    \\_\\     |_/          ||\n" +
                     "    `'\"                  \\_\\",
 
-            2, " ~,  O\n" +
+            "play", " ~,  O\n" +
                     " /)\\~_/\\\n" +
                     "'  \\ \\~_\\__ ~\n" +
                     "  _|_)_\\_( )~~~\n" +
@@ -159,20 +159,20 @@ public class Images {
                     "  ||\n" +
                     "  || ejm98",
 
-            3, "     _ ____\n" +
+            "feed", "     _ ____\n" +
                     "     /( ) _   \\\n" +
                     "    / //   /\\` \\,  ||--||--||-\n" +
                     "      \\|   |/  \\|  ||--||--||-\n" +
                     "~^~^~^~~^~~~^~~^^~^^^^^^^^^^^^",
 
-            4, "           ,--,\n" +
+            "clean", "           ,--,\n" +
                     "     _ ___/ /\\|\n" +
                     " ,;'( )__, )  ~\n" +
                     "//  //   '--; \n" +
                     "'   \\     | ^\n" +
                     "     ^    ^",
 
-            5, "         /           /   \n" +
+            "sleep", "         /           /   \n" +
                     "         /' .,,,,  ./       \n" +
                     "        /';'     ,/        \n" +
                     "       / /   ,,//,`'`     \n" +
@@ -192,7 +192,7 @@ public class Images {
                     "    :   \\         ;       Horse? \n" +
                     "       .                  by Ooyamaneko",
 
-            6, "         {)          \n" +
+            "rideHorse", "         {)          \n" +
                     "        c==//\\         \n" +
                     "   _-~~/-._|_|         \n" +
                     "  /'_,/,   //'~~~\\;;,  \n" +
@@ -203,7 +203,7 @@ public class Images {
 
     ));
 
-    public static void getImage(String usersChoiceOfAnimal, int activityForTamagotchi){
+    public static void getImage(String usersChoiceOfAnimal, String activityForTamagotchi){
         if (usersChoiceOfAnimal.equals("dog")) {
             System.out.println(dogImages.get(activityForTamagotchi));
         } else if (usersChoiceOfAnimal.equals("cat")) {

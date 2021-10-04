@@ -2,7 +2,7 @@
 call a method that is only created in child class (parent class don't have access to it)
 ((Dog) animalCreatedByUser).runWithDog("-", 5);
 
-case 1: // cute Tamagotchi
+case 1: // cuteAnimal
 case 2: // play
 case 3: // feed
 case 4: // clean

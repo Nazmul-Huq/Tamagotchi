@@ -9,8 +9,17 @@ public class Cat extends Tamagotchi{
         super(name);
     }
 
-    public void playOutsideWithCat(int activityForTamagotchi){
+    public void playWithKittens(String nameOfAnimal, String usersChoiceOfAnimal, String activityForTamagotchi, Tamagotchi animalCreatedByUser){
         System.out.println(Images.catImages.get(activityForTamagotchi));
+        if (animalCreatedByUser.hungriness != 10 && animalCreatedByUser.dirtiness  != 10 && animalCreatedByUser.energy != 0) {
+            System.out.println(Images.catImages.get(activityForTamagotchi));
+            setEnergy("-", 2);
+            setHungriness("+", 2);
+            setDirtiness("+", 2);
+            System.out.println(animalCreatedByUser);
+        } else {
+            Game.checkAndRecommendActivityBeforePlay(nameOfAnimal, usersChoiceOfAnimal, activityForTamagotchi, animalCreatedByUser);
+        }
     }
 
 
