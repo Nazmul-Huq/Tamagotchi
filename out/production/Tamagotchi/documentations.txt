@@ -1,0 +1,34 @@
+
+call a method that is only created in child class (parent class don't have access to it)
+((Dog) animalCreatedByUser).runWithDog("-", 5);
+
+case 1: // cute Tamagotchi
+case 2: // play
+case 3: // feed
+case 4: // clean
+case 5: // sleep
+case 6: // run for dog
+
+
+
+
+    public static void startActivityWithTamagotchi(String usersChoiceOfAnimal, int activityForTamagotchi, Tamagotchi animalCreatedByUser){
+        switch (activityForTamagotchi){
+            case 1:
+                System.out.println("no activity");
+            case 2: // play
+                animalCreatedByUser.play(usersChoiceOfAnimal, activityForTamagotchi);
+                break;
+            case 3: // feed
+                animalCreatedByUser.feed(usersChoiceOfAnimal, activityForTamagotchi);
+                break;
+            case 4: // clean
+                animalCreatedByUser.clean(usersChoiceOfAnimal, activityForTamagotchi);
+                break;
+            case 5: // sleep
+                animalCreatedByUser.sleep(usersChoiceOfAnimal, activityForTamagotchi);
+                break;
+            case 6: // run for dog
+                break;
+            default:break;
+        }
